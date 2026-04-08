@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-wrapper">
+
+    <h3>Sotuvlar</h3>
+
+    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        Sotuv qo‘shish
+    </button>
+
+    <table class="table text-center mt-3">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Mahsulot</th>
+            <th>Mijoz</th>
+            <th>Sana</th>
+            <th>Miqdor</th>
+            <th>Jami</th>
+            <th>To‘landi</th>
+            <th>Qarz</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for sale in sales %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ sale.product.name }}</td>
+            <td>{{ sale.client.name }}</td>
+            <td>{{ sale.created_at|date:"d.m.Y" }}</td>
+            <td>{{ sale.amount }}</td>
+            <td>{{ sale.total_price }}</td>
+            <td>{{ sale.paid_price }}</td>
+            <td>{{ sale.debt_price }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- MODAL -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form method="post" action="{% url 'sales-create' %}">
+                    {% csrf_token %}
+
+                    <div class="modal-header bg-dark">
+                        <h4>Sotuv qo‘shish</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <label>Mahsulot</label>
+                        <select name="product_id" class="form-control" required>
+                            {% for product in products %}
+                            <option value="{{ product.id }}">{{ product.name }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <br>
+
+                        <label>Mijoz</label>
+                        <select name="client_id" class="form-control" required>
+                            {% for client in clients %}
+                            <option value="{{ client.id }}">{{ client.name }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <br>
+
+                        <label>Miqdor</label>
+                        <input type="number" step="0.01" name="amount" class="form-control" required>
+
+                        <br>
+
+                        <label>To‘landi</label>
+                        <input type="number" step="0.01" name="paid_price" class="form-control" required>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Saqlash</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Yopish</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

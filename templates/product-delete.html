@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-wrapper">
+
+    <div class="content-header">
+        <div class="container-fluid">
+            <h2>Mahsulotni o‘chirish</h2>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="card card-danger">
+            <div class="card-body text-center">
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <h4>
+                        <span class="text-danger">{{ product.name }}</span>
+                        mahsulotini o‘chirmoqchimisiz?
+                    </h4>
+
+                    <br>
+
+                    <button type="submit" class="btn btn-danger">
+                        Ha, o‘chirish
+                    </button>
+
+                    <a href="{% url 'products' %}" class="btn btn-secondary">
+                        Bekor qilish
+                    </a>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

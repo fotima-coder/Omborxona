@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block page_title %} Bo‘limlar {% endblock %}
+
+{% block content %}
+<div class="content-wrapper p-4">
+
+    <h2 class="mb-4">Bo‘limlar</h2>
+
+    <div class="row">
+
+        <div class="col-md-4 mb-3">
+            <a href="{% url 'products' %}" class="btn btn-outline-dark btn-block p-4">
+                Mahsulotlar
+            </a>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <a href="{% url 'clients' %}" class="btn btn-outline-dark btn-block p-4">
+                Mijozlar
+            </a>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <a href="{% url 'sales' %}" class="btn btn-outline-dark btn-block p-4">
+                Sotuvlar
+            </a>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <a href="#" class="btn btn-outline-dark btn-block p-4">
+                Kirimlar
+            </a>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <a href="#" class="btn btn-outline-dark btn-block p-4">
+                To‘lovlar
+            </a>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <a href="/admin/" class="btn btn-outline-dark btn-block p-4">
+                Admin
+            </a>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

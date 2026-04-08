@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content-wrapper">
+
+    <h3>To‘langan qarzlar</h3>
+
+    <table class="table text-center">
+        <tr>
+            <th>#</th>
+            <th>Mijoz</th>
+            <th>Summa</th>
+            <th>Sana</th>
+        </tr>
+
+        {% for p in payments %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ p.client.name }}</td>
+            <td>{{ p.amount }}</td>
+            <td>{{ p.created_at|date:"d.m.Y" }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+{% endblock %}
