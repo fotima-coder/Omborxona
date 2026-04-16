@@ -1,0 +1,323 @@
+# Django loyihasi uchun .gitignore
+# Yaratilgan: 2026-04-17
+
+# ============================================
+# Python
+# ============================================
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual muhit
+venv/
+env/
+.venv/
+.env/
+virtualenv/
+ENV/
+env.bak/
+venv.bak/
+myenv/
+.env.local
+
+# Pip
+pip-log.txt
+pip-delete-this-directory.txt
+.pip-cache/
+
+# Poetry
+poetry.lock
+
+# PyInstaller
+*.manifest
+*.spec
+
+# ============================================
+# Django
+# ============================================
+# Ma'lumotlar bazasi
+*.sqlite3
+*.db
+*.db.sqlite3
+db.sqlite3
+db.sqlite3-journal
+
+# Statik va media fayllar
+staticfiles/
+static_collected/
+media/
+mediafiles/
+
+# Migratsiyalar (ixtiyoriy - jamoada ishlasangiz saqlang)
+ */migrations/*.py
+ !*/migrations/__init__.py
+
+# ============================================
+# Muhit o'zgaruvchilari
+# ============================================
+.env
+.env.*
+!.env.example
+.env.production
+.env.development
+.env.staging
+env.sh
+secrets.py
+secret.py
+secrets.yml
+config.yml
+local_settings.py
+settings_local.py
+
+# ============================================
+# IDE va Editor fayllari
+# ============================================
+# PyCharm
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea_modules/
+
+# VSCode
+.vscode/
+*.code-workspace
+.history/
+*.vsix
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.netrwhist
+.vim/
+.viminfo
+
+# Emacs
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Eclipse
+.project
+.pydevproject
+.settings
+.classpath
+
+# Atom
+.atom/
+.apm
+
+# Geany
+.geany
+
+# Spyder
+.spyderproject
+.spyproject
+.ropeproject
+
+# ============================================
+# Operatsion tizim fayllari
+# ============================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+.fuse_hidden*
+.directory
+.Trash-*
+.~lock.*
+
+# ============================================
+# Log fayllari
+# ============================================
+*.log
+logs/
+*.log.*
+log/
+debug.log
+error.log
+access.log
+celery*.log
+django*.log
+*.pid
+
+# ============================================
+# Test va Coverage
+# ============================================
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.tox/
+htmlcov/
+coverage.*
+junit.xml
+test-output.xml
+*.prof
+
+# ============================================
+# Build va Distribution
+# ============================================
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+*.whl
+
+# ============================================
+# Jupyter Notebook
+# ============================================
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+.jupyter/
+jupyter_config.py
+
+# ============================================
+# Docker
+# ============================================
+.dockerignore
+docker-compose.override.yml
+.docker/
+*.dockerignore
+
+# ============================================
+# Security va Maxfiy ma'lumotlar
+# ============================================
+# Google OAuth
+google-credentials.json
+client_secret*.json
+oauth2.keys
+*.pem
+*.key
+*.crt
+*.p12
+
+# Maxfiy kalitlar
+secret_key.txt
+secrets/
+private/
+keys/
+*.secret
+credentials.json
+
+# ============================================
+# Backup fayllari
+# ============================================
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+*.tmp
+*.temp
+~*
+
+# ============================================
+# Boshqa
+# ============================================
+# Redis
+dump.rdb
+appendonly.aof
+
+# SQLite
+*.sqlite
+*.sqlite3-shm
+*.sqlite3-wal
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Node (agar frontend ishlatsangiz)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Sphinx dokumentatsiyasi
+docs/_build/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# profiling data
+.prof
+
+# Scrapy
+.scrapy
+
+# Selenium
+geckodriver.log
+chromedriver.log
