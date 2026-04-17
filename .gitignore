@@ -52,6 +52,8 @@ staticfiles/
 static_collected/
 media/
 mediafiles/
+sent_emails/*
+!sent_emails/.gitkeep
 
 # Migratsiyalar (ixtiyoriy - jamoada ishlasangiz saqlang)
  */migrations/*.py

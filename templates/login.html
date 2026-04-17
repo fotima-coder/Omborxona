@@ -1,4 +1,4 @@
-<!-- templates/login.html (Minimal versiya) -->
+<!-- templates/login.html -->
 
 <!DOCTYPE html>
 <html lang="uz">
@@ -15,32 +15,56 @@
             align-items: center;
             min-height: 100vh;
             background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
         }
+
         .container {
             background: white;
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
         }
+
         h2 {
             text-align: center;
             margin-bottom: 30px;
+            color: #333;
         }
-        form div {
+
+        .form-group {
             margin-bottom: 20px;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
         }
+
+        label i {
+            margin-right: 8px;
+            color: #007bff;
+        }
+
         input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ddd;
             border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
         }
+
+        input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+        }
+
         button {
             width: 100%;
             padding: 12px;
@@ -49,35 +73,174 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background 0.3s;
         }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        button i {
+            margin-right: 8px;
+        }
+
         .divider {
             text-align: center;
-            margin: 20px 0;
+            margin: 25px 0 20px;
             color: #999;
+            position: relative;
         }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+
         .google-btn {
-            display: block;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
             padding: 12px;
             background: white;
             color: #333;
             border: 1px solid #ddd;
             border-radius: 5px;
             text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-sizing: border-box;
         }
+
         .google-btn:hover {
-            background: #f5f5f5;
+            background: #f8f9fa;
+            border-color: #ccc;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .google-btn i {
+            color: #4285F4;
+            font-size: 18px;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .extra-links {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .extra-links a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .extra-links a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Kirish</h2>
+<div class="container">
+    <h2>👋 Xush kelibsiz</h2>
 
-        {% load socialaccount %}
-        <a href="{% provider_login_url 'google' process='login' next=request.GET.next%}" class="google-btn">
-            <i class="fab fa-google"></i> Google orqali kirish
-        </a>
+    <!-- Django messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="{% if message.tags == 'error' %}error-message{% else %}success-message{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Login Form -->
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="username">
+                <i class="fas fa-user"></i>
+                Foydalanuvchi nomi yoki Email
+            </label>
+            <input type="text"
+                   id="username"
+                   name="username"
+                   placeholder="username yoki email@example.com"
+                   value="{{ request.POST.username|default:'' }}"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">
+                <i class="fas fa-lock"></i>
+                Parol
+            </label>
+            <input type="password"
+                   id="password"
+                   name="password"
+                   placeholder="••••••••"
+                   required>
+        </div>
+
+        <input type="hidden" name="next" value="{{ request.GET.next|default:'/' }}">
+
+        <button type="submit">
+            <i class="fas fa-sign-in-alt"></i>
+            Tizimga kirish
+        </button>
+    </form>
+
+    <!-- Divider -->
+    <div class="divider">yoki</div>
+
+    <!-- Google Login Button -->
+
+    {% load socialaccount %}
+    <a href="{% provider_login_url 'google' process='login' %}?next={{ request.GET.next|default:'/' }}"
+       class="google-btn">
+        <i class="fab fa-google"></i>
+        Google orqali kirish
+    </a>
+
+    <!-- Extra Links -->
+    <div class="extra-links">
+        <a href="{% url 'account_reset_password' %}">Parolni unutdingizmi?</a>
+        <span style="margin: 0 10px;">•</span>
+        <a href="{% url 'account_signup' %}">Ro'yxatdan o'tish</a>
     </div>
+</div>
 </body>
 </html>

@@ -98,7 +98,7 @@ DATABASES = {
 
 
 # Allauth sozlamalari
-SITE_ID = 2
+SITE_ID = 3
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -117,10 +117,25 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 SOCIALACCOUNT_LOGIN_ON_GET = True  # GET so'rov bilan to'g'ridan-to'g'ri yo'naltirish
 
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+DEFAULT_FROM_EMAIL = 'noreply@munavvar.uz'
+
+# # Parol tiklash sozlamalari
+# ACCOUNT_PASSWORD_RESET_TOKEN_GENERATOR = 'allauth.account.utils.default_token_generator'
+
+# # Production settings
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = os.getenv('EMAIL_HOST')
+# EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
 
 # Google OAuth2 sozlamalari
 SOCIALACCOUNT_PROVIDERS = {
@@ -174,3 +189,28 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 AUTH_USER_MODEL = 'users.User'
+
+# Allauth sozlamalari - custom user model uchun
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
+ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
+
+# Token generator (custom user model uchun)
+ACCOUNT_EMAIL_CONFIRMATION_HMAC = True
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+
+# Email yuborishda plain text ishlatish
+EMAIL_USE_LOCALTIME = True
+EMAIL_USE_TLS = False
+
+# Allauth email sozlamalari
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+ACCOUNT_EMAIL_HTML = True
+
+# Sayt nomi
+SITE_NAME = 'Munavvar'
+
+# Custom adapter
+ACCOUNT_ADAPTER = 'users.adapters.CustomAccountAdapter'
+
+# # Email sozlamalari
+# DEFAULT_FROM_EMAIL = 'Munavvar <noreply@munavvar.uz>'
