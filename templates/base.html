@@ -24,7 +24,7 @@
         .main-header {
             background: linear-gradient(90deg, #3b82f6, #06b6d4);
             color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .main-header .nav-link {
@@ -77,7 +77,7 @@
         /* 💎 CARD */
         .card {
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             border: none;
         }
 
@@ -89,7 +89,7 @@
 
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         /* 📊 TABLE */
@@ -142,7 +142,7 @@
 
             <li class="nav-item">
                 <a href="{% url 'sections' %}" class="nav-link">
-                     Bosh sahifa
+                    Bosh sahifa
                 </a>
             </li>
         </ul>
@@ -170,13 +170,34 @@
 
         <div class="sidebar">
 
+            <!-- sidebar.html yoki navbar.html -->
+
+            {% load static %}
+            {% load socialaccount %}
+
             <div class="user-panel d-flex align-items-center">
                 <div class="image">
-                    <img src="{% static 'dist/img/user2-160x160.jpg' %}" class="img-circle">
+                    {% if user.socialaccount_set.all.0.get_avatar_url %}
+                    <!-- Google profil rasmi -->
+                    <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
+                         class="img-circle"
+                         alt="User Image"
+                         style="width: 40px; height: 40px; object-fit: cover;">
+                    {% elif user.profile.avatar %}
+                    <!-- Agar maxsus profil modeli bo'lsa -->
+                    <img src="{{ user.profile.avatar.url }}"
+                         class="img-circle"
+                         alt="User Image">
+                    {% else %}
+                    <!-- Default rasm -->
+                    <img src="{% static 'dist/img/user2-160x160.jpg' %}"
+                         class="img-circle"
+                         alt="User Image">
+                    {% endif %}
                 </div>
                 <div class="info">
                     <a href="#" class="d-block text-white">
-                        {{ request.user.username }}
+                        {{ request.user.get_full_name|default:request.user.username }}
                     </a>
                 </div>
             </div>
